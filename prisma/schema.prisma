@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("superadmin") // superadmin, manager, staff
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+model Package {
+  id              String             @id @default(cuid())
+  title           String
+  slug            String             @unique
+  overview        String
+  price           Float              @default(0)
+  durationDays    Int                @default(1)
+  durationNights  Int                @default(1)
+  destinationName String
+  category        String             @default("Popular") // Honeymoon, Family, Luxury, Medical, Nature
+  inclusions      String?            // JSON or newline-separated string
+  exclusions      String?            // JSON or newline-separated string
+  accommodation   String?
+  featured        Boolean            @default(false)
+  active          Boolean            @default(true)
+  coverImage      String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  destinationId   String?
+  destination     Destination?       @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  images          PackageImage[]
+  itineraries     PackageItinerary[]
+  enquiries       Enquiry[]
+
+  @@map("packages")
+}
+
+model PackageImage {
+  id        String   @id @default(cuid())
+  packageId String
+  url       String
+  caption   String?
+  isCover   Boolean  @default(false)
+  order     Int      @default(0)
+  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@map("package_images")
+}
+
+model PackageItinerary {
+  id          String   @id @default(cuid())
+  packageId   String
+  dayNumber   Int
+  title       String
+  description String
+  activities  String?
+  meals       String?
+  package     Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@map("package_itineraries")
+}
+
+model Destination {
+  id                 String             @id @default(cuid())
+  name               String
+  slug               String             @unique
+  description        String
+  location           String
+  touristAttractions String             // Newline separated or JSON
+  bestTimeToVisit    String
+  coverImage         String?
+  featured           Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  images             DestinationImage[]
+  packages           Package[]
+
+  @@map("destinations")
+}
+
+model DestinationImage {
+  id            String      @id @default(cuid())
+  destinationId String
+  url           String
+  caption       String?
+  isCover       Boolean     @default(false)
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@map("destination_images")
+}
+
+model Enquiry {
+  id                 String   @id @default(cuid())
+  customerName       String
+  phoneNumber        String
+  email              String?
+  travelDate         String?
+  numberOfTravellers Int      @default(1)
+  message            String?
+  status             String   @default("New") // New, Contacted, Follow-up, Confirmed, Closed
+  adminNotes         String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  packageId          String?
+  packageName        String?
+  package            Package? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+
+  @@map("enquiries")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  status    String   @default("Unread") // Unread, Replied, Archived
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String?
+  imageUrl  String
+  ctaText   String?  @default("Explore Packages")
+  ctaLink   String?  @default("/packages")
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("banners")
+}
+
+model WebsiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("website_settings")
+}

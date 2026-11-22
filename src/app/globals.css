@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #232c57;
+  --main-hover: #171d3d;
+  --white-color: #ffffff;
+  --black-color: #1E293B;
+  --black-color-opacity: #1E293Bc4;
+  --paragraph-color: #818090;
+  --bg-color: #F3F6FD;
+  --accent-color: #F79837;
+  --transition: 0.3s all ease-in-out;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--black-color);
+  background-color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--paragraph-color);
+  line-height: 1.7;
+}
+
+/* Layali Kerala Theme Button */
+.btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--white-color) !important;
+  background-color: var(--main-color);
+  padding: 12px 28px;
+  border-radius: 6px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--main-color);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(35, 44, 87, 0.18);
+}
+
+.btn-theme:hover {
+  background-color: var(--main-hover);
+  border-color: var(--main-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(35, 44, 87, 0.28);
+}
+
+.btn-theme-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--main-color);
+  background-color: transparent;
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: 2px solid var(--main-color);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-theme-outline:hover {
+  background-color: var(--main-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-hero-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  transition: var(--transition);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.btn-hero-outline:hover {
+  background-color: #ffffff;
+  color: var(--main-color) !important;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-theme-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffffff !important;
+  background-color: var(--accent-color);
+  padding: 12px 28px;
+  border-radius: 6px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(247, 152, 55, 0.25);
+}
+
+.btn-theme-accent:hover {
+  background-color: #e08323;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(247, 152, 55, 0.35);
+}
+
+/* Section Subheading Badge */
+.section-tag {
+  display: inline-block;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--main-color);
+  background-color: rgba(35, 44, 87, 0.08);
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 12px;
+}
+
+/* Card hover animation */
+.travel-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #EAEFF9;
+}
+
+.travel-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px rgba(35, 44, 87, 0.09);
+  border-color: #cbd5e1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color);
+}
